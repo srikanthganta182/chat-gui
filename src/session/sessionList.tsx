@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SessionItem from './SessionItem';
-import SessionService from './SessionService';
+import SessionService from './session.controller.ts';
 import {Session} from './session';
 
 interface SessionListProps {

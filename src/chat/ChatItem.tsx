@@ -8,8 +8,7 @@ interface ChatItemProps {
 const ChatItem: React.FC<ChatItemProps> = ({chat}) => {
     const createdAt = chat.created_at.toLocaleString(); // Convert Date to string representation
 
-    return (
-        <div>
+    return (<div>
             <h3>Chat ID: {chat.chat_id}</h3>
             <p>Session ID: {chat.session_id}</p>
             <p>Text: {chat.text}</p>
