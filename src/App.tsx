@@ -1,14 +1,15 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
 import ChatForm from './chat/ChatForm';
-import SessionList from './session/sessionList';
+import ChatList from './chat/ChatList';
+import SessionList from './session/SessionList';
 
 const App: React.FC = () => {
     return (
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/:clientName" element={<ClientPage/>}/>
+                    <Route path="/:clientName/:sessionId" element={<ClientPage/>}/>
                 </Routes>
             </div>
         </Router>
@@ -16,12 +17,13 @@ const App: React.FC = () => {
 };
 
 const ClientPage: React.FC = () => {
-    const {clientName = ''} = useParams<{ clientName?: string }>();
+    const {clientName = '', sessionId = ''} = useParams<{ clientName?: string, sessionId?: string }>();
 
     return (
         <div>
             <h2>Client: {clientName}</h2>
-            <ChatForm/>
+            <ChatForm sessionId={sessionId}/>
+            <ChatList sessionId={sessionId}/>
             <SessionList clientName={clientName}/>
         </div>
     );

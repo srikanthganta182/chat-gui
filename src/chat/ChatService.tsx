@@ -1,33 +1,42 @@
 import axios, {AxiosResponse} from 'axios';
-import config from '../../config.ts';
 import {Chat} from './chat';
 
-const {backendUrl} = config;
+const backendUrl = 'http://localhost:8081'; // Consider moving this to a config file
 
-class ChatService {
-    static async getChats(): Promise<Chat[]> {
-        const response: AxiosResponse<Chat[]> = await axios.get(`${backendUrl}/chat`);
-        return response.data;
-    }
-
-    static async getChat(id: string): Promise<Chat> {
-        const response: AxiosResponse<Chat> = await axios.get(`${backendUrl}/chat/${id}`);
-        return response.data;
-    }
-
-    static async createChat(chat: Chat): Promise<Chat> {
-        const response: AxiosResponse<Chat> = await axios.post(`${backendUrl}/chat`, chat);
-        return response.data;
-    }
-
-    static async updateChat(id: string, chat: Chat): Promise<Chat> {
-        const response: AxiosResponse<Chat> = await axios.put(`${backendUrl}/chat/${id}`, chat);
-        return response.data;
-    }
-
-    static async deleteChat(id: string): Promise<void> {
-        await axios.delete(`${backendUrl}/chat/${id}`);
-    }
+const getChats = async (): Promise<Chat[]> => {
+    const response: AxiosResponse<Chat[]> = await axios.get(`${backendUrl}/chat`);
+    return response.data;
 }
 
-export default ChatService;
+const getChat = async (id: string): Promise<Chat> => {
+    const response: AxiosResponse<Chat> = await axios.get(`${backendUrl}/chat/${id}`);
+    return response.data;
+}
+
+const createChat = async (chat: Chat): Promise<Chat> => {
+    const response: AxiosResponse<Chat> = await axios.post(`${backendUrl}/chat`, chat);
+    return response.data;
+}
+
+const updateChat = async (id: string, chat: Chat): Promise<Chat> => {
+    const response: AxiosResponse<Chat> = await axios.put(`${backendUrl}/chat/${id}`, chat);
+    return response.data;
+}
+
+const deleteChat = async (id: string): Promise<void> => {
+    await axios.delete(`${backendUrl}/chat/${id}`);
+}
+
+const getChatsBySession = async (sessionId: string): Promise<Chat[]> => {
+    const response: AxiosResponse<Chat[]> = await axios.get(`${backendUrl}/chat/session/${sessionId}`);
+    return response.data;
+}
+
+export default {
+    getChats,
+    getChat,
+    createChat,
+    updateChat,
+    deleteChat,
+    getChatsBySession
+}

@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
-import ChatService from './ChatService.tsx';
+import ChatService from './ChatService';
 import {Chat} from './chat';
 
-const ChatForm: React.FC = () => {
-    const [sessionID, setSessionID] = useState('');
+interface ChatFormProps {
+    sessionId: string;
+}
+
+const ChatForm: React.FC<ChatFormProps> = ({sessionId}) => {
     const [text, setText] = useState('');
     const [isClient, setIsClient] = useState(false);
 
@@ -11,8 +14,8 @@ const ChatForm: React.FC = () => {
         e.preventDefault();
 
         const newChat: Chat = {
-            chat_id: '', // Generate the chat ID on the server side
-            session_id: sessionID,
+            chat_id: '',
+            session_id: sessionId,
             text,
             is_client: isClient,
             created_at: new Date(),
@@ -21,8 +24,6 @@ const ChatForm: React.FC = () => {
         try {
             const response = await ChatService.createChat(newChat);
             console.log('Created chat:', response);
-            // Clear form fields
-            setSessionID('');
             setText('');
             setIsClient(false);
         } catch (error) {
@@ -34,14 +35,6 @@ const ChatForm: React.FC = () => {
         <div>
             <h2>Create Chat</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Session ID:</label>
-                    <input
-                        type="text"
-                        value={sessionID}
-                        onChange={(e) => setSessionID(e.target.value)}
-                    />
-                </div>
                 <div>
                     <label>Text:</label>
                     <input

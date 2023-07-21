@@ -1,23 +1,12 @@
-import {useEffect, useState} from 'react';
-import ChatItem from './ChatItem.tsx';
-import ChatService from './ChatService.tsx';
-import {Chat} from './chat';
+import ChatItem from './ChatItem';
+import useChats from './useChat';
 
-const ChatList = () => {
-    const [chats, setChats] = useState<Chat[]>([]);
+interface ChatListProps {
+    sessionId: string;
+}
 
-    useEffect(() => {
-        fetchChats();
-    }, []);
-
-    const fetchChats = async () => {
-        try {
-            const response = await ChatService.getChats();
-            setChats(response);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+const ChatList: React.FC<ChatListProps> = ({sessionId}) => {
+    const chats = useChats(sessionId);
 
     return (
         <div>
