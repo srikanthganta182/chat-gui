@@ -17,7 +17,6 @@ const App: React.FC = () => {
         </Router>
     );
 };
-
 const ClientPage: React.FC = () => {
     const {client_name = ''} = useParams<{ client_name?: string }>();
     const [sessionId, setSessionId] = useState<string>("");
@@ -29,7 +28,7 @@ const ClientPage: React.FC = () => {
     };
 
     const refresh = () => {
-        setRefreshCount(refreshCount + 1);
+        setRefreshCount(prevCount => prevCount + 1);
     };
 
     useEffect(() => {
@@ -41,7 +40,7 @@ const ClientPage: React.FC = () => {
         };
 
         fetchSessions();
-    }, [client_name]);
+    }, [client_name, refreshCount]); // Added refreshCount to dependencies
 
     const handleSessionDelete = async () => {
         const sessions = await SessionService.getSessionsForClient(client_name);
@@ -53,14 +52,14 @@ const ClientPage: React.FC = () => {
         refresh();  // to refresh the components depending on this state
     };
 
-
     return (
         <div>
             <h2>Client: {client_name}</h2>
             <CreateSession clientName={client_name} onSessionCreate={handleCreate}/>
             <SessionList clientName={client_name} onSessionSelect={setSessionId} refreshCount={refreshCount}
                          onSessionDelete={handleSessionDelete}/>
-            {sessionId && <ChatList sessionId={sessionId} refreshCount={refreshCount}/>}
+            {sessionId &&
+                <ChatList sessionId={sessionId} refreshCount={refreshCount} onChatReceive={refresh}/>}
             {sessionId && <ChatForm sessionId={sessionId}/>}
         </div>
     );

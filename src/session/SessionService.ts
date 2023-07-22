@@ -8,11 +8,15 @@ const getSessions = async (): Promise<Session[]> => {
     return response.data;
 }
 
-const getSessionsByClient = async (client: string): Promise<Session[]> => {
+const getSessionsForClient = async (client: string): Promise<Session[]> => {
     const response: AxiosResponse<Session[]> = await axios.get(
         `${backendUrl}/session/client/${client}`
     );
-    return response.data;
+
+    const sessions: Session[] = response.data;
+    sessions.sort((a: Session, b: Session) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+
+    return sessions;
 }
 
 
@@ -27,7 +31,7 @@ const deleteSession = async (sessionId: string): Promise<void> => {
 
 export default {
     getSessions,
-    getSessionsForClient: getSessionsByClient,
+    getSessionsForClient,
     createSession,
     deleteSession,
 }
