@@ -21,8 +21,13 @@ const createSession = async (session: Session): Promise<Session> => {
     return response.data;
 }
 
+const deleteSession = async (sessionId: string): Promise<void> => {
+    await axios.delete(`${backendUrl}/session/${sessionId}`);
+}
+
 export default {
     getSessions,
     getSessionsByClient,
-    createSession
+    createSession,
+    deleteSession,
 }

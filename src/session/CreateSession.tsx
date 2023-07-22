@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Session} from './Session.ts';
 import SessionService from './SessionService.ts';
 
-const CreateSession: React.FC = () => {
-    const [clientName, setClientName] = useState('');
+interface CreateSessionProps {
+    clientName: string;
+    onSessionCreate: (sessionId: string) => void;
+}
 
+const CreateSession: React.FC<CreateSessionProps> = ({clientName, onSessionCreate}) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const newSession: Session = {
-            session_id: '',
             client_name: clientName,
+            session_id: 'to-be-filled',
+            session_name: 'to-be-filled'
         };
 
         try {
-            await SessionService.createSession(newSession);
-            setClientName('');
+            const createdSession = await SessionService.createSession(newSession);
+            onSessionCreate(createdSession.session_id);
         } catch (error) {
             console.error(error);
         }
@@ -25,14 +29,6 @@ const CreateSession: React.FC = () => {
         <div>
             <h2>Create Session</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Client Name:</label>
-                    <input
-                        type="text"
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                    />
-                </div>
                 <button type="submit">Create</button>
             </form>
         </div>

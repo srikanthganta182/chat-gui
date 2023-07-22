@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import SessionService from './SessionService.ts';
 import {Session} from './Session.ts';
 
-const useSessions = (clientName: string): Session[] => {
+const useSessions = (clientName: string, refreshCount: number): Session[] => {
     const [sessions, setSessions] = useState<Session[]>([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const useSessions = (clientName: string): Session[] => {
         };
 
         fetchSessions();
-    }, [clientName]);
+    }, [clientName, refreshCount]);
 
     return sessions;
 };
