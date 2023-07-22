@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {Chat} from './Chat.ts';
+import {Chat} from './Chat';
 
 const backendUrl = 'http://localhost:8081'; // Consider moving this to a config file
 

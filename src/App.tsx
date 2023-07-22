@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
-import SessionList from './session/SessionList';
-import ChatList from './chat/ChatList';
+import ChatList from "./chat/ChatList.tsx";
+import SessionList from "./session/SessionList.tsx";
 
 const App: React.FC = () => {
     return (
         <Router>
             <div className="App">
                 <Routes>
-                    <Route path="/:clientName/*" element={<ClientPage/>}/>
+                    <Route path="/:client_name/*" element={<ClientPage/>}/>
                 </Routes>
             </div>
         </Router>
@@ -17,8 +17,7 @@ const App: React.FC = () => {
 
 const ClientPage: React.FC = () => {
     const {client_name = ''} = useParams<{ client_name?: string }>();
-    const [sessionId, setSessionId] = useState<string | null>(null);
-
+    const [sessionId, setSessionId] = useState<string>("");
     return (
         <div>
             <h2>Client: {client_name}</h2>

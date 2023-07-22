@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Chat} from './Chat.ts';
-import chatService from "./ChatService";
+import ChatService from "./ChatService.tsx";
 
 const useChats = (sessionId: string): Chat[] => {
     const [chats, setChats] = useState<Chat[]>([]);
@@ -8,7 +8,7 @@ const useChats = (sessionId: string): Chat[] => {
     useEffect(() => {
         const fetchChats = async () => {
             try {
-                const response = await chatService.getChatsBySession(sessionId);
+                const response = await ChatService.getChatsBySession(sessionId);
                 setChats(response);
             } catch (error) {
                 console.error(error);

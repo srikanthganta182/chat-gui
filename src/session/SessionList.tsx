@@ -8,6 +8,7 @@ interface SessionListProps {
 
 const SessionList: React.FC<SessionListProps> = ({clientName, onSessionSelect}) => {
     const sessions = useSessions(clientName);
+    console.log(clientName)
     console.log(sessions)
     return (
         <div>
