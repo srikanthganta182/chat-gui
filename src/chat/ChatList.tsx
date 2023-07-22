@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import ChatService from "./ChatService.tsx";
-import ChatItem from "./ChatItem.tsx";
-import {Chat} from "./Chat.ts";
+import ChatService from "./ChatService";
+import ChatItem from "./ChatItem";
+import {Chat} from "./Chat";
 
 interface ChatListProps {
     sessionId: string;
+    refreshCount: number;
 }
 
-const ChatList: React.FC<ChatListProps> = ({sessionId}) => {
+const ChatList: React.FC<ChatListProps> = ({sessionId, refreshCount}) => {
     const [chats, setChats] = useState<Chat[]>([]);
     const backendUrl = 'http://localhost:8081'; // Consider moving this to a config file
 
@@ -33,8 +34,7 @@ const ChatList: React.FC<ChatListProps> = ({sessionId}) => {
         return () => {
             eventSource.close();
         };
-    }, [sessionId]);
-
+    }, [sessionId, refreshCount]); // Added refreshCount to dependencies
 
     return (
         <div>
