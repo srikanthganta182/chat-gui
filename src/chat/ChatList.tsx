@@ -13,6 +13,7 @@ const ChatList: React.FC<ChatListProps> = ({sessionId, refreshCount}) => {
 
     const fetchChats = async () => {
         try {
+            // could be cached, I think
             const response = await ChatService.getChatsForSession(sessionId);
             setChats(response);
         } catch (error) {

@@ -9,8 +9,6 @@ interface ChatFormProps {
 
 const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
     const [text, setText] = useState('');
-    const [isClient, setIsClient] = useState(false);
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -18,7 +16,7 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
             chat_id: '',
             session_id: sessionId,
             text,
-            is_client: isClient,
+            is_client: true,
             created_at: new Date(),
         };
 
@@ -26,7 +24,6 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
             const response = await ChatService.createChat(newChat);
             console.log('Created chat:', response);
             setText('');
-            setIsClient(false);
             onChatCreate();
         } catch (error) {
             console.error(error);
@@ -43,14 +40,6 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
                         type="text"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Is Client:</label>
-                    <input
-                        type="checkbox"
-                        checked={isClient}
-                        onChange={(e) => setIsClient(e.target.checked)}
                     />
                 </div>
                 <button type="submit">Create</button>
