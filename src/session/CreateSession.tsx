@@ -14,7 +14,9 @@ const CreateSession: React.FC<CreateSessionProps> = ({clientName, onSessionCreat
         const newSession: Session = {
             client_name: clientName,
             session_id: 'to-be-filled',
-            session_name: 'to-be-filled'
+            session_name: 'to-be-filled',
+            created_at: new Date(),
+            updated_at: new Date()
         };
 
         try {

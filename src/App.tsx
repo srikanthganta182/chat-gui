@@ -22,10 +22,16 @@ const ClientPage: React.FC = () => {
     const [sessionId, setSessionId] = useState<string>("");
     const [refreshCount, setRefreshCount] = useState<number>(0);
 
-    const handleCreate = (sessionId: string) => {
-        setSessionId(sessionId);
-        refresh();
+    
+    const handleCreate = (newSessionId: string) => {
+        setSessionId(prevSessionId => {
+            if (prevSessionId !== newSessionId) {
+                refresh();
+            }
+            return newSessionId;
+        });
     };
+
 
     const refresh = () => {
         setRefreshCount(prevCount => prevCount + 1);
