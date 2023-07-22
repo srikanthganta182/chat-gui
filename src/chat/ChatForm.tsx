@@ -4,10 +4,9 @@ import ChatService from "./ChatService.tsx";
 
 interface ChatFormProps {
     sessionId: string;
-    onChatCreate: () => void;
 }
 
-const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
+const ChatForm: React.FC<ChatFormProps> = ({sessionId}) => {
     const [text, setText] = useState('');
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,10 +20,8 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
         };
 
         try {
-            const response = await ChatService.createChat(newChat);
-            console.log('Created chat:', response);
+            await ChatService.createChat(newChat);
             setText('');
-            onChatCreate();
         } catch (error) {
             console.error(error);
         }

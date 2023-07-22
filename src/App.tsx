@@ -49,8 +49,8 @@ const ClientPage: React.FC = () => {
             <CreateSession clientName={client_name} onSessionCreate={handleCreate}/>
             <SessionList clientName={client_name} onSessionSelect={setSessionId} refreshCount={refreshCount}
                          onSessionDelete={refresh}/>
-            {sessionId && <ChatList sessionId={sessionId} refreshCount={refreshCount}/>}
-            <ChatForm sessionId={sessionId} onChatCreate={refresh}/>
+            {sessionId && <ChatList sessionId={sessionId}/>}
+            <ChatForm sessionId={sessionId}/>
         </div>
     );
 };
