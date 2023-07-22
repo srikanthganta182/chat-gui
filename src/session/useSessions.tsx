@@ -8,7 +8,7 @@ const useSessions = (clientName: string, refreshCount: number): Session[] => {
     useEffect(() => {
         const fetchSessions = async () => {
             try {
-                const response = await SessionService.getSessionsByClient(clientName);
+                const response = await SessionService.getSessionsForClient(clientName);
                 setSessions(response);
             } catch (error) {
                 console.error(error);

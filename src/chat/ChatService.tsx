@@ -38,5 +38,5 @@ export default {
     createChat,
     updateChat,
     deleteChat,
-    getChatsBySession
+    getChatsForSession: getChatsBySession
 }

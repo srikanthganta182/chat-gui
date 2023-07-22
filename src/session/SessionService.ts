@@ -27,7 +27,7 @@ const deleteSession = async (sessionId: string): Promise<void> => {
 
 export default {
     getSessions,
-    getSessionsByClient,
+    getSessionsForClient: getSessionsByClient,
     createSession,
     deleteSession,
 }

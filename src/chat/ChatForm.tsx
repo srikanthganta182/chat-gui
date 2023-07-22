@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import ChatService from './ChatService';
 import {Chat} from './Chat.ts';
+import ChatService from "./ChatService.tsx";
 
 interface ChatFormProps {
     sessionId: string;
+    onChatCreate: () => void;
 }
 
-const ChatForm: React.FC<ChatFormProps> = ({sessionId}) => {
+const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatCreate}) => {
     const [text, setText] = useState('');
     const [isClient, setIsClient] = useState(false);
 
@@ -26,6 +27,7 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId}) => {
             console.log('Created chat:', response);
             setText('');
             setIsClient(false);
+            onChatCreate();
         } catch (error) {
             console.error(error);
         }

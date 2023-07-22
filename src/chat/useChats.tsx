@@ -8,7 +8,7 @@ const useChats = (sessionId: string): Chat[] => {
     useEffect(() => {
         const fetchChats = async () => {
             try {
-                const response = await ChatService.getChatsBySession(sessionId);
+                const response = await ChatService.getChatsForSession(sessionId);
                 setChats(response);
             } catch (error) {
                 console.error(error);
