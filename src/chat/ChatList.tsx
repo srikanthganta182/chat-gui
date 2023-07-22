@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import ChatService from "./ChatService.tsx";
 import ChatItem from "./ChatItem.tsx";
 import {Chat} from "./Chat.ts";
 
@@ -10,20 +11,30 @@ const ChatList: React.FC<ChatListProps> = ({sessionId}) => {
     const [chats, setChats] = useState<Chat[]>([]);
     const backendUrl = 'http://localhost:8081'; // Consider moving this to a config file
 
+    const fetchChats = async () => {
+        try {
+            const response = await ChatService.getChatsForSession(sessionId);
+            setChats(response);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        const eventSource = new EventSource(`${backendUrl}/chat/sse`);
+        fetchChats(); // Fetch chats on component mount
+
+        const eventSource = new EventSource(`${backendUrl}/chat/sse?sessionId=${sessionId}`);
 
         eventSource.onmessage = (event) => {
             const newChat = JSON.parse(event.data);
-            if (newChat.session_id === sessionId) {  // only add messages from this session
-                setChats((prevChats) => [...prevChats, newChat]);
-            }
+            setChats((prevChats) => [...prevChats, newChat]);
         };
 
         return () => {
             eventSource.close();
         };
-    }, [sessionId, setChats]);
+    }, [sessionId]);
+
 
     return (
         <div>

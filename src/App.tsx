@@ -49,6 +49,7 @@ const ClientPage: React.FC = () => {
             <CreateSession clientName={client_name} onSessionCreate={handleCreate}/>
             <SessionList clientName={client_name} onSessionSelect={setSessionId} refreshCount={refreshCount}
                          onSessionDelete={refresh}/>
+            {/*chat to be refreshed on close*/}
             {sessionId && <ChatList sessionId={sessionId}/>}
             <ChatForm sessionId={sessionId}/>
         </div>
