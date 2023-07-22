@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
 import SessionList from './session/SessionList';
 import ChatList from './chat/ChatList';
@@ -16,31 +16,15 @@ const App: React.FC = () => {
 };
 
 const ClientPage: React.FC = () => {
-    const {clientName = ''} = useParams<{ clientName?: string }>();
+    const {client_name = ''} = useParams<{ client_name?: string }>();
+    const [sessionId, setSessionId] = useState<string | null>(null);
+
     return (
         <div>
-            <h2>Client: {clientName}</h2>
-            <Routes>
-                <Route index element={<SessionListContainer/>}/>
-                <Route path=":sessionId" element={<SessionPage/>}/>
-            </Routes>
+            <h2>Client: {client_name}</h2>
+            <SessionList clientName={client_name} onSessionSelect={setSessionId}/>
+            {sessionId && <ChatList sessionId={sessionId}/>}
         </div>
     );
 };
-
-const SessionPage: React.FC = () => {
-    const {sessionId = ''} = useParams<{ sessionId?: string }>();
-    return (
-        <div>
-            <h2>Session: {sessionId}</h2>
-            <ChatList sessionId={sessionId}/>
-        </div>
-    );
-};
-
-const SessionListContainer: React.FC = () => {
-    const {clientName = ''} = useParams<{ clientName?: string }>();
-    return <SessionList clientName={clientName}/>;
-}
-
 export default App;

@@ -1,18 +1,19 @@
 import SessionItem from './SessionItem';
-import useSessions from './useSession';
+import useSessions from './useSessions.tsx';
 
 interface SessionListProps {
     clientName: string;
+    onSessionSelect: (sessionId: string) => void;
 }
 
-const SessionList: React.FC<SessionListProps> = ({clientName}) => {
+const SessionList: React.FC<SessionListProps> = ({clientName, onSessionSelect}) => {
     const sessions = useSessions(clientName);
-
+    console.log(sessions)
     return (
         <div>
             <h2>Session List</h2>
             {sessions.map((session) => (
-                <SessionItem key={session.session_id} session={session}/>
+                <SessionItem key={session.session_id} session={session} onSelect={onSessionSelect}/>
             ))}
         </div>
     );

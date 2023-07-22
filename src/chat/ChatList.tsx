@@ -1,5 +1,5 @@
 import ChatItem from './ChatItem';
-import useChats from './useChat';
+import useChats from './useChats.tsx';
 
 interface ChatListProps {
     sessionId: string;

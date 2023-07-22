@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ChatService from './ChatService';
-import {Chat} from './chat';
+import {Chat} from './Chat.ts';
 
 interface ChatFormProps {
     sessionId: string;

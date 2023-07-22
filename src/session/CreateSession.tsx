@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Session} from './session';
-import SessionService from './session.controller';
+import {Session} from './Session.ts';
+import SessionService from './SessionService.ts';
 
 const CreateSession: React.FC = () => {
     const [clientName, setClientName] = useState('');

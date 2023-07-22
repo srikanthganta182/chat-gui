@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Chat} from './chat';
+import {Chat} from './Chat.ts';
 import chatService from "./ChatService";
 
 const useChats = (sessionId: string): Chat[] => {

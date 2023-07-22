@@ -1,7 +1,7 @@
 import {Response} from 'express';
 import axios from 'axios';
 
-const backendUrl = 'http://localhost:8081'; // Modify if necessary
+const backendUrl = 'http://localhost:8081';
 
 export const getChats = async (_req: any, res: Response) => {
     try {

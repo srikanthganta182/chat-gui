@@ -1,15 +1,15 @@
-import React from 'react';
-import {Session} from './session';
-
-interface SessionItem {
-    session: Session;
+interface SessionItemProps {
+    session: any;
+    onSelect: (sessionId: string) => void;
 }
 
-const SessionItem: React.FC<SessionItem> = ({session}) => {
+const SessionItem: React.FC<SessionItemProps> = ({session, onSelect}) => {
     return (
         <div>
             <h3>Client Name: {session.client_name}</h3>
-            <p>Session ID: {session.session_id}</p>
+            <button onClick={() => onSelect(session.session_id)}>
+                Session ID: {session.session_id}
+            </button>
         </div>
     );
 };

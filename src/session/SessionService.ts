@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {Session} from './session';
+import {Session} from './Session.ts';
 
 const backendUrl = 'http://localhost:8081'; // Consider moving this to a config file
 
