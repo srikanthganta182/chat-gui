@@ -1,6 +1,7 @@
 import React from 'react';
 import {Session} from './Session.ts';
 import SessionService from './SessionService.ts';
+import {Button} from "antd";
 
 interface CreateSessionProps {
     clientName: string;
@@ -27,7 +28,7 @@ const CreateSession: React.FC<CreateSessionProps> = ({clientName, onSessionCreat
         }
     };
 
-    return (<button type="submit" onClick={handleSubmit}>Create +</button>);
+    return (<Button type="primary" onClick={handleSubmit}>Create +</Button>);
 };
 
 export default CreateSession;

@@ -13,7 +13,7 @@ const SessionList: React.FC<SessionListProps> = ({clientName, onSessionSelect, r
 
     return (
         <div>
-            <h2>Session List</h2>
+            <h2 className="text-toolbox-secondary text-base font-bold mb-2 ml-6 session-list-title">Session List</h2>
             {sessions.map((session) => (
                 <SessionItem key={session.session_id} session={session} onSelect={onSessionSelect}
                              onSessionDelete={onSessionDelete}/>
