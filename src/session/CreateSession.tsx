@@ -27,14 +27,7 @@ const CreateSession: React.FC<CreateSessionProps> = ({clientName, onSessionCreat
         }
     };
 
-    return (
-        <div>
-            <h2>Create Session</h2>
-            <form onSubmit={handleSubmit}>
-                <button type="submit">Create</button>
-            </form>
-        </div>
-    );
+    return (<button type="submit" onClick={handleSubmit}>Create +</button>);
 };
 
 export default CreateSession;

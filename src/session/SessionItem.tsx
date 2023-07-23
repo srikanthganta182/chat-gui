@@ -18,11 +18,11 @@ const SessionItem: React.FC<SessionItemProps> = ({session, onSelect, onSessionDe
     };
 
     return (
-        <div>
-            <button onClick={() => onSelect(session.session_id)}>
-                Session ID: {session.session_name}
+        <div className="button-container">
+            <button className="session-button select-button" onClick={() => onSelect(session.session_id)}>
+                {session.session_name}
             </button>
-            <button onClick={handleDelete}>X</button>
+            <button className="session-button delete-button" onClick={handleDelete}>X</button>
         </div>
     );
 };
