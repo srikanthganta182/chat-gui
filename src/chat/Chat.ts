@@ -4,4 +4,5 @@ export interface Chat {
     text: string;
     is_client: boolean;
     created_at: Date;
+    
 }
