@@ -28,7 +28,7 @@ const CreateSession: React.FC<CreateSessionProps> = ({clientName, onSessionCreat
         }
     };
 
-    return (<Button type="primary" onClick={handleSubmit}>Create +</Button>);
+    return (<Button className="session-button select-button" type="primary" onClick={handleSubmit}>Create +</Button>);
 };
 
 export default CreateSession;

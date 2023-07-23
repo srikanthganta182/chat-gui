@@ -11,16 +11,21 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 1.5;
+    white-space: nowrap; /* Add this line */
+    overflow: hidden; /* Add this line */
+    text-overflow: ellipsis; /* Add this line */
 }
 
 .select-button {
-    flex: 4;
+    flex: 4 1 0; /* Changed from 100% to 0 */
     background-color: #00B9FF;
     padding-left: 24px;
+    width: 100%; /* Add this line */
 }
 
+
 .delete-button {
-    flex: 1;
+    flex: 1 1 0; /* Changed from 100% to 0 */
     background-color: #f44336;
     text-align: center;
 }
@@ -34,8 +39,13 @@
 }
 
 .session-sidebar, .sidebar.chat-session, .chatbox {
-    background-color: #FFFFFF;
-    height: 100vh;
+    background-color: #FFFFFF !important;
+    min-height: 100vh; /* Changed from height to min-height */
+}
+
+.session-list-container {
+    height: calc(100vh - 100px); /* Adjust the height as needed */
+    overflow-y: auto;
 }
 
 .container {

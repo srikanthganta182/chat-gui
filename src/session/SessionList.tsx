@@ -12,13 +12,15 @@ const SessionList: React.FC<SessionListProps> = ({clientName, onSessionSelect, r
     const sessions = useSessions(clientName, refreshCount);
 
     return (
-        <div>
+        <>
             <h2 className="text-toolbox-secondary text-base font-bold mb-2 ml-6 session-list-title">Session List</h2>
-            {sessions.map((session) => (
-                <SessionItem key={session.session_id} session={session} onSelect={onSessionSelect}
-                             onSessionDelete={onSessionDelete}/>
-            ))}
-        </div>
+            <div className="session-list-container">
+                {sessions.map((session) => (
+                    <SessionItem key={session.session_id} session={session} onSelect={onSessionSelect}
+                                 onSessionDelete={onSessionDelete}/>
+                ))}
+            </div>
+        </>
     );
 };
 
