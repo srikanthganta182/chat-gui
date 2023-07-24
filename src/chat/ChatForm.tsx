@@ -16,11 +16,10 @@ const ChatForm: React.FC<ChatFormProps> = ({sessionId, onChatSent}) => {
         const newChat: Chat = {
             chat_id: '',
             session_id: sessionId,
-            text,
+            text: text,
             is_client: true,
             created_at: new Date(),
         };
-
 
         ChatService.createChat(newChat)
             .then(() => {
