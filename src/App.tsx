@@ -24,7 +24,6 @@ const ClientPage = () => {
     const {client_name = ''} = useParams<{ client_name?: string }>();
     const [sessionId, setSessionId] = useState<string>("");
     const [refreshCount, setRefreshCount] = useState<number>(0);
-
     const handleCreate = (newSessionId: string) => {
         if (sessionId !== newSessionId) {
             refresh();
@@ -62,7 +61,7 @@ const ClientPage = () => {
                 {sessionId && (
                     <>
                         <ChatList sessionId={sessionId} refreshCount={refreshCount} onChatReceive={refresh}/>
-                        <ChatForm sessionId={sessionId}/>
+                        <ChatForm sessionId={sessionId} onChatSent={refresh}/>
                     </>
                 )}
             </Content>
