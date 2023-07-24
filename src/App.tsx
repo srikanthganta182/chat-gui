@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
 import SessionList from "./session/SessionList.tsx";
 import ChatList from "./chat/ChatList.tsx";
